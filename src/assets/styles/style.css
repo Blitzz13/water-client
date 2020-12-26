@@ -1,0 +1,17 @@
+body {
+	background-color: black;
+	background-image: url("../background.png");
+	background-size: auto;
+}
+
+.jumbotron-image {
+	background-image: url(https://www.godisageek.com/wp-content/uploads/days-gone-review.jpg);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	min-height: 300px;
+}
+
+.game-card-animation:hover {
+	
+}
