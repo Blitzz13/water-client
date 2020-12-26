@@ -30,7 +30,14 @@ export default class Converter {
 			id: value.id,
 			username: value.username,
 			fullName: value.fullName,
+			token: this.convertTokenProviderToService(value.tokenProvider),
+		}
+	}
+
+	public convertTokenProviderToService(value: clients.TokenProvider): types.TokenProvider {
+		return {
 			token: value.token,
+			expiresInSeconds: value.expiresInSeconds,
 		}
 	}
 }

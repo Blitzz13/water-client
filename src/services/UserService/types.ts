@@ -1,7 +1,7 @@
 export interface AuthenticateResponse {
 	id: string;
 	username: string;
-	token: string;
+	token: TokenProvider;
 	fullName?: string;
 }
 
@@ -17,6 +17,11 @@ export interface User {
 	role: UserRole;
 	fullName?: string;
 	password: string;
+}
+
+export interface TokenProvider {
+	token: string;
+	expiresInSeconds: number;
 }
 
 export enum UserRole {
