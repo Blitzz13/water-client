@@ -23,7 +23,6 @@ export class UserService implements IUserService {
 
 	public async register(user: types.User): Promise<string> {
 		try {
-			debugger
 			const result = this.client.register(Converter.prototype.convertUserToApi(user));
 			return result;
 		} catch (ex) {
