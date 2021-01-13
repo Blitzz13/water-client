@@ -23,6 +23,13 @@
 								  type="submit">
 							Search
 						</b-button>
+						<b-button size="sm"
+								  class="mr-2"
+								  variant="light"
+								  type="submit"
+								  @click="onTestClick">
+							Test
+						</b-button>
 					</b-nav-form>
 
 					<b-nav-item-dropdown right v-if="isAuthenticated">
@@ -31,9 +38,10 @@
 								{{userInfo.username}}
 							</em>
 						</template>
-						<b-dropdown-item>
+						<b-link :to="{ name:'profile', params: { id: userInfo.id } }"
+								router-tag="b-dropdown-item">
 							Profile
-						</b-dropdown-item>
+						</b-link>
 						<b-dropdown-item @click="onLogOutClick">
 							Log Out
 						</b-dropdown-item>

@@ -38,9 +38,8 @@ export default class RegisterContent extends Vue {
 		this.userService.register(this.convertRegisterVueModelToService(this.m_registerModel));
 	}
 
-	private convertRegisterVueModelToService(value: RegisterVueModel): types.User {
+	private convertRegisterVueModelToService(value: RegisterVueModel): types.RegisterUserRequest {
 		return {
-			id: null,
 			username: value.username,
 			email: value.email,
 			password: value.password,

@@ -1,9 +1,9 @@
 import * as types from "./types";
 import * as clients from "generated-clients";
 export default class Converter {
-	public convertUserToApi(value: types.User): clients.User {
+	//Convert to api
+	public convertUserToApi(value: types.RegisterUserRequest): clients.User {
 		return {
-			id: null,
 			username: value.username,
 			email: value.email,
 			fullName: value.fullName,
@@ -24,13 +24,23 @@ export default class Converter {
 				throw new Error(`User role '${value}' is not supported in the current context.`);
 		}
 	}
-
+	//Convert to service
 	public convertAuthenticateResponseToService(value: clients.AuthenticateResponse): types.AuthenticateResponse {
 		return {
 			id: value.id,
 			username: value.username,
+			userRole: this.convertUserRoleToService(value.userRole),
+			tokenProvider: this.convertTokenProviderToService(value.tokenProvider),
+		}
+	}
+
+	public convertUserItemToService(value: clients.UserItem): types.UserItem{
+		return {
+			id: value.id,
+			username: value.username,
 			fullName: value.fullName,
-			token: this.convertTokenProviderToService(value.tokenProvider),
+			email: value.email,
+			role: this.convertUserRoleToService(value.role),
 		}
 	}
 
@@ -38,6 +48,19 @@ export default class Converter {
 		return {
 			token: value.token,
 			expiresInSeconds: value.expiresInSeconds,
+		}
+	}
+
+	public convertUserRoleToService(value: clients.UserRole): types.UserRole {
+		switch (value) {
+			case clients.UserRole.Administrator :
+				return types.UserRole.ADMINISTRATOR;
+			case clients.UserRole.Company:
+				return  types.UserRole.COMPANY;
+			case clients.UserRole.User:
+				return types.UserRole.USER;
+			default:
+				throw new Error(`User role '${value}' is not supported in the current context.`);
 		}
 	}
 }

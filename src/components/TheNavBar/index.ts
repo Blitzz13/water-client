@@ -1,5 +1,6 @@
-import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
-
+import * as userTypes from "@/services/UserService";
+import { Inject } from 'inversify-props';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 @Component({
 	name: "the-nav-bar"
 })
@@ -7,15 +8,30 @@ export default class TheNavBar extends Vue {
 	@Prop()
 	public registerModalId: string;
 
+	@Inject()
+	public userService: userTypes.IUserService;
+
 	protected get isAuthenticated(): boolean {
-		return this.$store.getters.isAuthenticated;
+		if (this.$store.getters) {
+			return this.$store.getters.isAuthenticated;
+		}
+
+		return false;
 	}
 
-	protected get userInfo() {
-		return this.$store.getters.authUser;
+	protected get userInfo(): userTypes.AuthenticateResponse {
+		if (this.$store.getters) {
+			return this.$store.getters.authUser;
+		}
+
+		return null;
 	}
 
 	protected onLogOutClick(): void {
 		this.$store.commit("deleteUser");
+	}
+
+	protected onTestClick(): void {
+		this.userService.test();
 	}
 }

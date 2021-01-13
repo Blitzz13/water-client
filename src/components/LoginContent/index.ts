@@ -38,7 +38,7 @@ export default class LoginContent extends Vue {
 			this.$store.commit("setUser", response);
 			this.$emit("on-user-login");
 		} catch (ex) {
-
+			throw new Error(ex);
 		}
 	}
 
@@ -50,7 +50,7 @@ export default class LoginContent extends Vue {
 	}
 }
 
-interface LabelIds{
+interface LabelIds {
 	usernameId: string;
 	passwordId: string;
 }

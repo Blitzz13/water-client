@@ -14,6 +14,14 @@ function authUser(state: AuthState): userTypes.AuthenticateResponse {
 	return state.authUser;
 }
 
+function token(state: AuthState): string {
+	if (state.authUser) {
+		return state.authUser.tokenProvider.token;
+	}
+
+	return null
+}
+
 function isAuthenticated(state: AuthState): boolean {
 	if (state.authUser) {
 		return true;
@@ -24,7 +32,8 @@ function isAuthenticated(state: AuthState): boolean {
 
 const getters = {
 	authUser,
-	isAuthenticated
+	isAuthenticated,
+	token,
 }
 
 // mutations
