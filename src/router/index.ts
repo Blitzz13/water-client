@@ -1,4 +1,6 @@
 import Home from '@/views/Home/index.vue';
+import Profile from '@/views/Profile/index.vue';
+import RegisterCompany from '@/views/RegisterCompany/index.vue';
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 
@@ -18,6 +20,16 @@ const routes: RouteConfig[] = [
 		// which is lazy-loaded when the route is visited.
 		component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
 	},
+	{
+		path: '/profiles/:id',
+		name: 'profile',
+		component: Profile,
+	},
+	{
+		path: '/register-company',
+		name: 'register-company',
+		component: RegisterCompany,
+	},
 ];
 
 const router = new VueRouter({
@@ -26,12 +38,12 @@ const router = new VueRouter({
 
 //router.beforeEach((to, from, next) => {
 //	// redirect to login page if not logged in and trying to access a restricted page
-//	const publicPages: string[] = ['/login'];
+//	const publicPages: string[] = ['/login',];
 //	const authRequired = !publicPages.includes(to.path);
-//	const loggedIn = localStorage.getItem('user');
+//	const authenticated = localStorage.getItem('user');
 
-//	if (authRequired && !loggedIn) {
-//		return next('/login');
+//	if (authRequired && !authenticated) {
+//		return next(from.path.concat("?login"));
 //	}
 
 //	next();

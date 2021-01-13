@@ -13,4 +13,8 @@ export default class Home extends Vue {
 	protected get msg(): string {
 		return "Welcome to Your Vue.js + TypeScript App";
 	}
+
+	public mounted() {
+		return this.$store.getters.token;
+	}
 }

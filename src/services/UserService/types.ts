@@ -1,8 +1,8 @@
 export interface AuthenticateResponse {
 	id: string;
 	username: string;
-	token: TokenProvider;
-	fullName?: string;
+	tokenProvider: TokenProvider;
+	userRole: UserRole;
 }
 
 export interface AuthenticateRequest {
@@ -10,13 +10,20 @@ export interface AuthenticateRequest {
 	password?: string;
 }
 
-export interface User {
-	id?: string;
+export interface RegisterUserRequest {
 	username: string;
 	email: string;
 	role: UserRole;
 	fullName?: string;
 	password: string;
+}
+
+export interface UserItem {
+	id?: string;
+	username?: string;
+	email?: string;
+	role?: UserRole;
+	fullName?: string;
 }
 
 export interface TokenProvider {

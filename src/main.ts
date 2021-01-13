@@ -13,7 +13,7 @@ require("@/Utils/generalUtils.ts");
 Vue.use(BootstrapVue);
 Vue.use(animatecss);
 Vue.config.productionTip = false;
-Vue.component("the-nav-bar", TheNavBar)
+Vue.component("the-nav-bar", TheNavBar);
 
 class AppBootstrap {
 	constructor() {
