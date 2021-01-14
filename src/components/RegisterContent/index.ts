@@ -35,7 +35,16 @@ export default class RegisterContent extends Vue {
 	}
 
 	protected onSubmitClick() {
-		this.userService.register(this.convertRegisterVueModelToService(this.m_registerModel));
+		try {
+			this.$emit("loading");
+			this.userService.register(this.convertRegisterVueModelToService(this.m_registerModel));
+
+			this.$emit("user-register");
+		} catch (ex) {
+			throw new Error(ex);
+		} finally {
+			this.$emit("finish-loading");
+		}
 	}
 
 	private convertRegisterVueModelToService(value: RegisterVueModel): types.RegisterUserRequest {

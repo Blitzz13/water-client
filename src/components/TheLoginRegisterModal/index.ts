@@ -1,6 +1,7 @@
+import LoadingSpinner from "@/components/LoadingSpinner/index.vue";
 import { LoginVueModel } from "@/components/LoginContent";
-import { RegisterVueModel } from "@/components/RegisterContent";
 import LoginContent from "@/components/LoginContent/index.vue";
+import { RegisterVueModel } from "@/components/RegisterContent";
 import RegisterContent from "@/components/RegisterContent/index.vue";
 import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 
@@ -9,6 +10,7 @@ import { Component, Prop, Vue, Watch } from "vue-property-decorator";
 	components: {
 		LoginContent,
 		RegisterContent,
+		LoadingSpinner,
 	}
 })
 export default class TheLoginModal extends Vue {
@@ -18,7 +20,7 @@ export default class TheLoginModal extends Vue {
 	private m_loginContent: LoginVueModel = null;
 	private m_registerContent: RegisterVueModel = null;
 	private m_showModal: boolean = false;
-
+	private m_showSpinner: boolean = false;
 
 	protected get showModal(): boolean {
 		return this.m_showModal;
@@ -26,6 +28,10 @@ export default class TheLoginModal extends Vue {
 
 	protected set showModal(value: boolean) {
 		this.m_showModal = value;
+	}
+
+	protected get showSpinner(): boolean {
+		return this.m_showSpinner;
 	}
 
 	protected get loginContent() {
@@ -42,6 +48,25 @@ export default class TheLoginModal extends Vue {
 
 	protected onRegisterContentChange(value: RegisterVueModel): void {
 		this.m_loginContent = value;
+	}
+
+	@Watch("$route.query")
+	public onRouteAuthentication() {
+		if (this.$route.query["authenticated"] === "false") {
+			this.m_showModal = true;
+		}
+	}
+
+	protected onLoading(): void {
+		this.m_showSpinner = true;
+	}
+
+	protected onFinishLoading(): void {
+		this.m_showSpinner = false;
+	}
+
+	protected onUserRegister(): void {
+		this.m_showModal = false;
 	}
 
 	protected onUserLogin(): void {

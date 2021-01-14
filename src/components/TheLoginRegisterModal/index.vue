@@ -12,10 +12,14 @@
 				 :hide-footer="true"
 				 centered
 				 no-close-on-backdrop>
-			<login-content @on-user-login="onUserLogin">
+			<loading-spinner v-if="showSpinner"></loading-spinner>
+			<login-content @user-login="onUserLogin"
+						   @loading="onLoading"
+						   @finish-loading="onFinishLoading">
 			</login-content>
 			<hr />
-			<register-content>
+			<register-content @loading="onLoading"
+							  @user-register="onUserRegister">
 			</register-content>
 		</b-modal>
 	</div>

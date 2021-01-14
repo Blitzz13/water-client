@@ -1,22 +1,12 @@
-import { Component, Vue, Prop } from "vue-property-decorator";
-import Test from "@/components/Test/index.vue";
+import { FingerprintSpinner } from "epic-spinners";
+import { Component, Vue } from "vue-property-decorator";
 
 @Component({
+	name: "loading-spinner",
 	components: {
-		Test,
+		FingerprintSpinner,
 	},
 })
-export default class HelloWorld extends Vue {
-	@Prop()
-	public msg: string | undefined;
+export default class LoadingSpinner extends Vue {
 
-	public tests = [
-		{ asd: "asd" },
-		{ asd: "awd" },
-		{ asd: "gg" },
-		{ asd: "wad" },
-		{ asd: "aed" },
-		{ asd: "as" },
-		{ asd: "adopdrgksd" },
-	];
 }

@@ -1,8 +1,9 @@
 import Home from '@/views/Home/index.vue';
 import Profile from '@/views/Profile/index.vue';
-import RegisterCompany from '@/views/RegisterCompany/index.vue';
 import Vue from 'vue';
+import Store from '@/store';
 import VueRouter, { RouteConfig } from 'vue-router';
+import NotFound from "@/views/NotFound/index.vue";
 
 Vue.use(VueRouter);
 
@@ -26,9 +27,9 @@ const routes: RouteConfig[] = [
 		component: Profile,
 	},
 	{
-		path: '/register-company',
-		name: 'register-company',
-		component: RegisterCompany,
+		path: "*",
+		name: "404",
+		component: NotFound,
 	},
 ];
 
@@ -36,17 +37,16 @@ const router = new VueRouter({
 	routes,
 });
 
-//router.beforeEach((to, from, next) => {
-//	// redirect to login page if not logged in and trying to access a restricted page
-//	const publicPages: string[] = ['/login',];
-//	const authRequired = !publicPages.includes(to.path);
-//	const authenticated = localStorage.getItem('user');
+router.beforeEach((to, from, next) => {
+	const privatePages: string[] = [];
+	const authRequired = privatePages.includes(to.path);
+	const authenticated = Store.getters.authUser;
 
-//	if (authRequired && !authenticated) {
-//		return next(from.path.concat("?login"));
-//	}
+	if (authRequired && !authenticated) {
+		return next(from.path.concat("?authenticated=false"));
+	}
 
-//	next();
-//})
+	next();
+})
 
 export default router;

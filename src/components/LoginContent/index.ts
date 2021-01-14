@@ -4,7 +4,7 @@ import { Inject } from 'inversify-props';
 import { Component, Vue } from "vue-property-decorator";
 
 @Component({
-	name: "login-content"
+	name: "login-content",
 })
 export default class LoginContent extends Vue {
 	@Inject()
@@ -32,13 +32,16 @@ export default class LoginContent extends Vue {
 
 	protected async onLoginClick(): Promise<void> {
 		try {
+			this.$emit("loading");
 			const response: userTypes.AuthenticateResponse
 				= await this.userService.authenticate(this.convertLoginVueModelToService(this.m_loginModel));
 
 			this.$store.commit("setUser", response);
-			this.$emit("on-user-login");
+			this.$emit("user-login");
 		} catch (ex) {
 			throw new Error(ex);
+		} finally {
+			this.$emit("finish-loading");
 		}
 	}
 
