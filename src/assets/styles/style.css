@@ -30,25 +30,32 @@ body {
 	left: 45%;
 }
 
-.game-card-animation:hover {
+.scale-content {
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+	.scale-content:hover {
+		transform: scaleX(1.15) scaleY(1.15);
+	}
+
+.game-details-carousel {
+	max-width: 550px;
+	margin: 0 auto;
 }
 
 /* Not found page*/
 @import url(https://fonts.googleapis.com/css?family=Gilda+Display);
 
 html {
-	/*background: radial-gradient(#000, #111);*/
-	/*color: white;*/
-	overflow: hidden;
+	overflow-x: hidden;
 	height: 100%;
-	user-select: none;
 }
 
 .error {
 	text-align: center;
 	font-family: serif;
 	font-size: 95px;
-	/*font-style: italic;*/
 	text-align: center;
 	width: 100px;
 	height: 60px;
@@ -60,14 +67,12 @@ html {
 	left: -60px;
 	right: 0;
 	animation: noise 2s linear infinite;
-	overflow: default;
 }
 
 	.error:after {
 		content: '404';
 		font-family: serif;
 		font-size: 100px;
-		/*font-style: italic;*/
 		text-align: center;
 		width: 150px;
 		height: 60px;
@@ -87,7 +92,6 @@ html {
 	text-align: center;
 	font-family: serif;
 	font-size: 30px;
-	/*font-style: italic;*/
 	text-align: center;
 	width: 250px;
 	height: 60px;
@@ -105,7 +109,6 @@ html {
 	content: '404';
 	font-family: serif;
 	font-size: 100px;
-	/*font-style: italic;*/
 	text-align: center;
 	width: 100px;
 	height: 60px;

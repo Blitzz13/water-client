@@ -1,5 +1,5 @@
 import * as types from "@/services/UserService";
-import GeneralUtils from "@/Utils/generalUtils";
+import GeneralUtils from "@/utils/generalUtils";
 import { Inject } from 'inversify-props';
 import { Component, Vue } from "vue-property-decorator";
 
@@ -19,10 +19,10 @@ export default class RegisterContent extends Vue {
 
 	protected get labelIds(): LabelIds {
 		return {
-			usernameId: GeneralUtils.prototype.generateRandomString(7),
-			fullNameId: GeneralUtils.prototype.generateRandomString(7),
-			passwordId: GeneralUtils.prototype.generateRandomString(7),
-			emailId: GeneralUtils.prototype.generateRandomString(7),
+			usernameId: GeneralUtils.generateRandomString(7),
+			fullNameId: GeneralUtils.generateRandomString(7),
+			passwordId: GeneralUtils.generateRandomString(7),
+			emailId: GeneralUtils.generateRandomString(7),
 		};
 	}
 

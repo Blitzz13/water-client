@@ -1,5 +1,5 @@
 import * as userTypes from "@/services/UserService";
-import GeneralUtils from "@/Utils/generalUtils";
+import GeneralUtils from "@/utils/generalUtils";
 import { Inject } from 'inversify-props';
 import { Component, Vue } from "vue-property-decorator";
 
@@ -17,8 +17,8 @@ export default class LoginContent extends Vue {
 
 	protected get labelIds(): LabelIds {
 		return {
-			usernameId: GeneralUtils.prototype.generateRandomString(7),
-			passwordId: GeneralUtils.prototype.generateRandomString(7),
+			usernameId: GeneralUtils.generateRandomString(7),
+			passwordId: GeneralUtils.generateRandomString(7),
 		};
 	}
 

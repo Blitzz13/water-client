@@ -50,7 +50,7 @@ export default class TheLoginModal extends Vue {
 		this.m_loginContent = value;
 	}
 
-	@Watch("$route.query")
+	@Watch("$route.query", { immediate: true })
 	public onRouteAuthentication() {
 		if (this.$route.query["authenticated"] === "false") {
 			this.m_showModal = true;

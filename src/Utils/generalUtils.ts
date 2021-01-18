@@ -1,5 +1,5 @@
 export default class GeneralUtils {
-	public generateRandomString(length: number): string {
+	public static generateRandomString(length: number): string {
 		var result = "";
 		var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 		var charactersLength = characters.length;

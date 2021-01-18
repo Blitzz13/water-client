@@ -1,19 +1,24 @@
 <template>
 	<div class="container">
 		<b-row>
-			<b-col v-for="game in games">
-				<b-card :img-src="game.imageSource"
-						:img-alt="game.imageName"
+			<b-col v-for="game in vueGameItems"
+				   :key="game.id"
+				   cols="2">
+				<b-card :img-src="game.coverImage"
 						img-top
 						tag="article"
-						style="max-width: 20rem;"
-						class="mb-2 animate__animated">
+						img-height="150"
+						style="max-height: 200px; background-color: dimgray"
+						class="mb-2 scale-content"
+						@click="onGameDetailsClick(game.id)">
+					<b-row>
+						<b-col>
+							<span class="ml-5">
+								${{ game.price }}
+							</span>
+						</b-col>
+					</b-row>
 
-					<b-button variant="primary"
-							  size="sm"
-							  right>
-						Check it out
-					</b-button>
 				</b-card>
 			</b-col>
 		</b-row>

@@ -19,6 +19,7 @@
 			</login-content>
 			<hr />
 			<register-content @loading="onLoading"
+							  @finish-loading="onFinishLoading"
 							  @user-register="onUserRegister">
 			</register-content>
 		</b-modal>

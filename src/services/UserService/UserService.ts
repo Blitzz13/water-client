@@ -1,11 +1,10 @@
 import * as clientTypes from "generated-clients";
 import { UsersClient } from "generated-clients";
-import { injectable, Inject } from "inversify-props";
+import { injectable } from "inversify-props";
+import { BaserService } from '../BaseService';
 import Converter from "./Converter";
 import { IUserService } from './IUserService';
 import * as types from "./types";
-import { ITokenProvider } from '@/Providers/TokenProvider';
-import { BaserService } from '../BaseService';
 
 @injectable()
 export class UserService extends BaserService implements IUserService {
@@ -14,10 +13,10 @@ export class UserService extends BaserService implements IUserService {
 	public constructor() {
 		super();
 		//TODO: Improve the way of adding authorization header
-		const test = this;
+		const context = this;
 		this.client = new UsersClient("https://localhost:44356", {
 			fetch: async function (url: RequestInfo, init?: RequestInit): Promise<Response> {
-				return await window.fetch(url, test.updateOptions(init));
+				return await window.fetch(url, context.updateOptions(init));
 			}
 		});
 	}
@@ -25,7 +24,7 @@ export class UserService extends BaserService implements IUserService {
 	public async authenticate(request: types.AuthenticateRequest): Promise<types.AuthenticateResponse> {
 		try {
 			const apiResult: clientTypes.AuthenticateResponse = await this.client.authenticate(request);
-			const result: types.AuthenticateResponse = Converter.prototype.convertAuthenticateResponseToService(apiResult);
+			const result: types.AuthenticateResponse = Converter.convertAuthenticateResponseToService(apiResult);
 
 			return result;
 		} catch (ex) {
@@ -36,7 +35,7 @@ export class UserService extends BaserService implements IUserService {
 	public async getUserById(id: string): Promise<types.UserItem> {
 		try {
 			const apiResult: clientTypes.UserItem = await this.client.getUserById(id);
-			const result: types.UserItem = Converter.prototype.convertUserItemToService(apiResult);
+			const result: types.UserItem = Converter.convertUserItemToService(apiResult);
 
 			return result;
 		} catch (ex) {
@@ -57,8 +56,16 @@ export class UserService extends BaserService implements IUserService {
 
 	public async register(user: types.RegisterUserRequest): Promise<string> {
 		try {
-			const result = this.client.register(Converter.prototype.convertUserToApi(user));
-			return result;
+			const result = this.client.register(Converter.convertUserToApi(user));
+			return null;
+		} catch (ex) {
+			throw new Error(ex);
+		}
+	}
+
+	public async buyGame(request: types.BuyGameRequest): Promise<void> {
+		try {
+			this.client.buyGame(Converter.convertBuyGameRequestToApi(request));
 		} catch (ex) {
 			throw new Error(ex);
 		}
