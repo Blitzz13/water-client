@@ -31,6 +31,11 @@ export interface TokenProvider {
 	expiresInSeconds: number;
 }
 
+export interface BuyGameRequest {
+	userId?: string;
+	gameId?: string;
+}
+
 export enum UserRole {
 	ADMINISTRATOR = "Administrator",
 	USER = "User",

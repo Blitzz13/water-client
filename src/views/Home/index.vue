@@ -2,12 +2,12 @@
 	<div class="container">
 		<b-jumbotron class="jumbotron-image">
 		</b-jumbotron>
-		<game-card-list></game-card-list>
-		<!-- 
-		Highlighted games
-		-->
-		<!--<img alt="Vue logo" src="@/assets/logo.png">-->
-		<!--<HelloWorld :msg="msg" />-->
+
+		<game-card-list :gameItems="featuredGames">
+		</game-card-list>
+
+		<loading-spinner v-if="isLoading">
+		</loading-spinner>
 	</div>
 </template>
 

@@ -5,4 +5,5 @@ export interface IUserService {
 	register(model: types.RegisterUserRequest): Promise<string>;
 	test(): Promise<string>;
 	getUserById(id: string): Promise<types.UserItem>;
+	buyGame(request: types.BuyGameRequest): Promise<void>;
 }

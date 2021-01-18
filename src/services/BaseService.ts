@@ -6,7 +6,6 @@ export class BaserService {
 	public tokenProvider: ITokenProvider;
 
 	protected updateOptions(options?: RequestInit): RequestInit {
-		debugger
 		const update = { ...options };
 		const token = this.tokenProvider.getToken();
 		if (token) {

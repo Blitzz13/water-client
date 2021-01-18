@@ -14,7 +14,6 @@ export class TokenProvider extends Vue implements ITokenProvider {
 	}
 
 	protected updateOptions(options?: RequestInit): RequestInit {
-		debugger
 		const update = { ...options };
 		if (this.getToken()) {
 			update.headers = {

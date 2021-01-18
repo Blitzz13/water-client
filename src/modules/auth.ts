@@ -3,10 +3,12 @@ import * as userTypes from "@/services/UserService";
 // state
 interface AuthState {
 	authUser: userTypes.AuthenticateResponse;
+	tokenExpirationDate: Date;
 }
 
 const state: AuthState = {
 	authUser: null,
+	tokenExpirationDate: null,
 }
 
 // getters
@@ -22,6 +24,14 @@ function token(state: AuthState): string {
 	return null
 }
 
+function hasTokenExpired(state: AuthState): boolean {
+	if (new Date() >= new Date(state.tokenExpirationDate)) {
+		return true;
+	}
+
+	return false;
+}
+
 function isAuthenticated(state: AuthState): boolean {
 	if (state.authUser) {
 		return true;
@@ -34,15 +44,20 @@ const getters = {
 	authUser,
 	isAuthenticated,
 	token,
+	hasTokenExpired,
 }
 
 // mutations
 function setUser(state: AuthState, user: userTypes.AuthenticateResponse) {
 	state.authUser = user;
+	const expiratonDate = new Date();
+	expiratonDate.setSeconds(expiratonDate.getSeconds() + user.tokenProvider.expiresInSeconds);
+	state.tokenExpirationDate = expiratonDate;
 }
 
 function deleteUser(state: AuthState) {
 	state.authUser = null;
+	state.tokenExpirationDate = null;
 }
 
 const mutations = {

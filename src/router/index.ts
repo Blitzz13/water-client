@@ -1,5 +1,6 @@
 import Home from '@/views/Home/index.vue';
 import Profile from '@/views/Profile/index.vue';
+import Game from '@/views/Game/index.vue';
 import Vue from 'vue';
 import Store from '@/store';
 import VueRouter, { RouteConfig } from 'vue-router';
@@ -9,22 +10,24 @@ Vue.use(VueRouter);
 
 const routes: RouteConfig[] = [
 	{
-		path: '/',
-		name: 'home',
+		path: "/",
+		name: "home",
 		component: Home,
 	},
 	{
-		path: '/about',
-		name: 'about',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
-		component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
+		path: "/about",
+		name: "about",
+		component: () => import(/* webpackChunkName: "about" */ "../views/About.vue"),
 	},
 	{
-		path: '/profiles/:id',
-		name: 'profile',
+		path: "/profiles/:id",
+		name: "profile",
 		component: Profile,
+	},
+	{
+		path: "/games/:id",
+		name: "game-details",
+		component: Game,
 	},
 	{
 		path: "*",
@@ -40,9 +43,15 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
 	const privatePages: string[] = [];
 	const authRequired = privatePages.includes(to.path);
-	const authenticated = Store.getters.authUser;
+	const authenticated = Store.getters.isAuthenticated;
+	const hasTokenExpired: boolean = Store.getters.hasTokenExpired;
 
 	if (authRequired && !authenticated) {
+		return next(from.path.concat("?authenticated=false"));
+	}
+
+	if (hasTokenExpired && authenticated) {
+		Store.commit("deleteUser");
 		return next(from.path.concat("?authenticated=false"));
 	}
 

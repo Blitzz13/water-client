@@ -1,4 +1,4 @@
-import GeneralUtils from "@/Utils/generalUtils";
+import GeneralUtils from "@/utils/generalUtils";
 import { Component, Vue } from "vue-property-decorator";
 import TheLoginRegisterModal from "@/components/TheLoginRegisterModal/index.vue";
 @Component({
@@ -8,6 +8,6 @@ import TheLoginRegisterModal from "@/components/TheLoginRegisterModal/index.vue"
 })
 export default class App extends Vue {
 	protected get registerModalId(): string {
-		return GeneralUtils.prototype.generateRandomString(10);
+		return GeneralUtils.generateRandomString(10);
 	}
 }

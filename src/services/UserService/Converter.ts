@@ -2,7 +2,7 @@ import * as types from "./types";
 import * as clients from "generated-clients";
 export default class Converter {
 	//Convert to api
-	public convertUserToApi(value: types.RegisterUserRequest): clients.User {
+	public static convertUserToApi(value: types.RegisterUserRequest): clients.User {
 		return {
 			username: value.username,
 			email: value.email,
@@ -12,7 +12,14 @@ export default class Converter {
 		}
 	}
 
-	public convertUserRoleToApi(value: types.UserRole): clients.UserRole {
+	public static convertBuyGameRequestToApi(value: types.BuyGameRequest): clients.BuyGameRequest {
+		return {
+			gameId: value.gameId,
+			userId: value.userId,
+		}
+	}
+
+	public static convertUserRoleToApi(value: types.UserRole): clients.UserRole {
 		switch (value) {
 			case types.UserRole.ADMINISTRATOR:
 				return clients.UserRole.Administrator;
@@ -25,7 +32,7 @@ export default class Converter {
 		}
 	}
 	//Convert to service
-	public convertAuthenticateResponseToService(value: clients.AuthenticateResponse): types.AuthenticateResponse {
+	public static convertAuthenticateResponseToService(value: clients.AuthenticateResponse): types.AuthenticateResponse {
 		return {
 			id: value.id,
 			username: value.username,
@@ -34,7 +41,7 @@ export default class Converter {
 		}
 	}
 
-	public convertUserItemToService(value: clients.UserItem): types.UserItem{
+	public static convertUserItemToService(value: clients.UserItem): types.UserItem {
 		return {
 			id: value.id,
 			username: value.username,
@@ -44,19 +51,19 @@ export default class Converter {
 		}
 	}
 
-	public convertTokenProviderToService(value: clients.TokenProvider): types.TokenProvider {
+	public static convertTokenProviderToService(value: clients.TokenProvider): types.TokenProvider {
 		return {
 			token: value.token,
 			expiresInSeconds: value.expiresInSeconds,
 		}
 	}
 
-	public convertUserRoleToService(value: clients.UserRole): types.UserRole {
+	public static convertUserRoleToService(value: clients.UserRole): types.UserRole {
 		switch (value) {
-			case clients.UserRole.Administrator :
+			case clients.UserRole.Administrator:
 				return types.UserRole.ADMINISTRATOR;
 			case clients.UserRole.Company:
-				return  types.UserRole.COMPANY;
+				return types.UserRole.COMPANY;
 			case clients.UserRole.User:
 				return types.UserRole.USER;
 			default:
