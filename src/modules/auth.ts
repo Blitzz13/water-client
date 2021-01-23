@@ -1,4 +1,5 @@
 import * as userTypes from "@/services/UserService";
+import { idsCache } from 'inversify-props';
 
 // state
 interface AuthState {
@@ -40,11 +41,22 @@ function isAuthenticated(state: AuthState): boolean {
 	return false;
 }
 
+function isAdmin(state: AuthState): boolean {
+	if (state.authUser) {
+		if (state.authUser.userRole === userTypes.UserRole.ADMINISTRATOR) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
 const getters = {
 	authUser,
 	isAuthenticated,
 	token,
 	hasTokenExpired,
+	isAdmin,
 }
 
 // mutations

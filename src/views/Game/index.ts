@@ -60,7 +60,10 @@ export default class Game extends BaseView {
 
 	protected onBuyClick() {
 		if (this.$store.getters.isAuthenticated) {
+			this.isLoading = true;
 			this.userService.buyGame({ userId: this.$store.getters.authUser.id, gameId: this.gameId });
+			this.isLoading = false;
+			window.location.reload();
 		} else {
 			this.$router.push(this.$route.path.concat("?authenticated=false"));
 		}

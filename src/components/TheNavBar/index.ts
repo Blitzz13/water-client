@@ -19,6 +19,14 @@ export default class TheNavBar extends Vue {
 		return false;
 	}
 
+	protected get isAdmin(): boolean {
+		if (this.$store.getters) {
+			return this.$store.getters.isAdmin;
+		}
+
+		return false;
+	}
+
 	protected get userInfo(): userTypes.AuthenticateResponse {
 		if (this.$store.getters) {
 			return this.$store.getters.authUser;

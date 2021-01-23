@@ -40,10 +40,17 @@ body {
 	}
 
 .game-details-carousel {
-	max-width: 550px;
+	max-width: 530px;
 	margin: 0 auto;
 }
 
+.keep-new-lines {
+	white-space: pre-line;
+}
+
+.add-image-margin {
+	margin-top: 30px;
+}
 /* Not found page*/
 @import url(https://fonts.googleapis.com/css?family=Gilda+Display);
 

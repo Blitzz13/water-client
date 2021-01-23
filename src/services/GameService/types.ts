@@ -1,14 +1,14 @@
 export interface AddGameRequest {
-	name?: string;
-	description?: string;
-	price?: number;
+	name: string;
+	description: string;
+	price: number;
 	rating?: number;
-	state?: GameState;
-	coverImage?: string;
-	imageUrls?: string[];
-	genre?: Genre;
-	isFeatured?: boolean;
-	companyName?: string;
+	state: GameState;
+	coverImage: string;
+	imageUrls: string[];
+	genre: Genre;
+	isFeatured: boolean;
+	companyName: string;
 }
 
 export enum GameState {

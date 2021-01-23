@@ -23,13 +23,12 @@
 								  type="submit">
 							Search
 						</b-button>
-						<b-button size="sm"
-								  class="mr-2"
-								  variant="light"
-								  type="submit"
-								  @click="onTestClick">
-							Test
-						</b-button>
+						<b-link v-if="isAdmin"
+								router-tag="b-button"
+								class="mr-2 btn-sm"
+								:to="{ name:'add-game' }">
+							Create game
+						</b-link>
 					</b-nav-form>
 
 					<b-nav-item-dropdown right v-if="isAuthenticated">
@@ -49,6 +48,7 @@
 
 					<b-button v-if="!isAuthenticated"
 							  v-b-modal="registerModalId"
+							  variant="primary"
 							  size="sm">
 						Log in
 					</b-button>
