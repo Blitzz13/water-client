@@ -1,9 +1,10 @@
-import Home from '@/views/Home/index.vue';
-import Profile from '@/views/Profile/index.vue';
-import Game from '@/views/Game/index.vue';
-import Vue from 'vue';
-import Store from '@/store';
-import VueRouter, { RouteConfig } from 'vue-router';
+import Home from "@/views/Home/index.vue";
+import Profile from "@/views/Profile/index.vue";
+import Game from "@/views/Game/index.vue";
+import AddGame from "@/views/AddGame/index.vue";
+import Vue from "vue";
+import Store from "@/store";
+import VueRouter, { RouteConfig } from "vue-router";
 import NotFound from "@/views/NotFound/index.vue";
 
 Vue.use(VueRouter);
@@ -25,9 +26,14 @@ const routes: RouteConfig[] = [
 		component: Profile,
 	},
 	{
-		path: "/games/:id",
+		path: "/game/:id",
 		name: "game-details",
 		component: Game,
+	},
+	{
+		path: "/games/add",
+		name: "add-game",
+		component: AddGame,
 	},
 	{
 		path: "*",

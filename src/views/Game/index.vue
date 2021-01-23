@@ -16,24 +16,40 @@
 					</template>
 				</b-carousel-slide>
 			</b-carousel>
-			<b-row>
-				<pre class="text-light mt-5 float-left">
-{{ gameVue.description }}
-				</pre>
+			<b-row class="mt-5">
+				<b-col>
+					<b-badge variant="info">
+						{{ gameVue.state }}
+					</b-badge>
+					<b-badge class="ml-2"
+							 variant="info">
+						{{ gameVue.genre }}
+					</b-badge>
+				</b-col>
 			</b-row>
-			<b-button v-if="!isGameBought"
-					  class="float-right"
-					  variant="primary"
-					  @click="onBuyClick">
-				Buy
-			</b-button>
-			<b-button v-else
-					  class="float-right"
-					  variant="primary"
-					  disabled>
-				Owned
-			</b-button>
-
+			<b-row>
+				<b-col>
+					<div class="text-light keep-new-lines mt-2">
+						{{ gameVue.description }}
+					</div>
+				</b-col>
+			</b-row>
+			<b-row>
+				<b-col>
+					<b-button v-if="!isGameBought"
+							  class="float-right mt-2 mb-3"
+							  variant="primary"
+							  @click="onBuyClick">
+						Buy
+					</b-button>
+					<b-button v-else
+							  class="float-right mt-2 mb-2"
+							  variant="primary"
+							  disabled>
+						Owned
+					</b-button>
+				</b-col>
+			</b-row>
 		</div>
 	</div>
 </template>

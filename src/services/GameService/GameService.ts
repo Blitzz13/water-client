@@ -8,8 +8,7 @@ import * as types from "./types";
 
 @injectable()
 export class GameService extends BaserService implements IGameService {
-
-	private client: GamesClient = null;
+	private client: GamesClient;
 
 	public constructor() {
 		super();
@@ -22,12 +21,15 @@ export class GameService extends BaserService implements IGameService {
 		});
 	}
 
-	addGame(model: types.AddGameRequest): Promise<string> {
+	removeGame(id: string): Promise<any> {
 		throw new Error("Method not implemented.");
 	}
 
-	removeGame(id: string): Promise<any> {
-		throw new Error("Method not implemented.");
+	public async addGame(request: types.AddGameRequest): Promise<string> {
+		const apiRequest: clientTypes.AddGameRequest = Converter.convertAddGameRequestToApi(request);
+		const result: string = await this.client.addGame(apiRequest);
+
+		return result;
 	}
 
 	public async listUserGames(id: string): Promise<types.GameItem[]> {

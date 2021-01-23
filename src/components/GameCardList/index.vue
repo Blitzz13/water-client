@@ -18,7 +18,6 @@
 							</span>
 						</b-col>
 					</b-row>
-
 				</b-card>
 			</b-col>
 		</b-row>

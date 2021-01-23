@@ -23,6 +23,20 @@ export default class Converter {
 		}
 	}
 
+	public static convertAddGameRequestToApi(value: types.AddGameRequest): clients.AddGameRequest {
+		return {
+			name: value.name,
+			companyName: value.companyName,
+			genre: this.convertGenreToApi(value.genre),
+			state: this.convertGameStateToApi(value.state),
+			isFeatured: value.isFeatured,
+			coverImage: value.coverImage,
+			imageUrls: value.imageUrls,
+			description: value.description,
+			price: value.price,
+		}
+	}
+
 	public static convertGenreToApi(value: types.Genre): clients.Genre {
 		switch (value) {
 			case types.Genre.ACTION:

@@ -1,10 +1,10 @@
-import HelloWorld from "@/components/HelloWorld/index.vue";
 import GameCardList from "@/components/GameCardList/index.vue";
-import { Component, Vue } from "vue-property-decorator";
-import { Inject } from "inversify-props";
+import HelloWorld from "@/components/HelloWorld/index.vue";
 import * as gameTypes from "@/services/GameService";
 import { GameItem } from "@/services/GameService";
 import BaseView from "@/views/BaseView";
+import { Inject } from "inversify-props";
+import { Component } from "vue-property-decorator";
 
 @Component({
 	components: {
