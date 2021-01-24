@@ -78,7 +78,7 @@
 					<b-icon icon="x-circle-fill"
 							scale="1.3"
 							variant="danger"
-							class="scroll-images-icon"
+							class="scroll-images-icon cursor-pointer"
 							@click="onImageRemove(image)">
 					</b-icon>
 				</div>
@@ -137,6 +137,7 @@
 						Description
 					</label>
 					<b-textarea v-if="showInputs"
+								rows="20"
 								class="float-left bg-dark text-light border-secondary"
 								v-model="gameInput.description">
 					</b-textarea>

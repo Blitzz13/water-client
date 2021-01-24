@@ -3,24 +3,25 @@
 		<b-navbar toggleable="lg" type="dark" variant="dark">
 			<b-link :to="{ name:'home' }"
 					router-tag="b-navbar-brand"
-					href="#">
+					href="#"
+					class="cursor-pointer">
 				Home
 			</b-link>
-			
-			<b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
+			<b-navbar-toggle target="nav-collapse">
+			</b-navbar-toggle>
 			<b-collapse id="nav-collapse" is-nav>
 				<b-navbar-nav class="ml-auto">
 					<b-nav-form>
 						<b-form-input size="sm"
-									  class="mr-2 bg-dark"
-									  style="border-top:0px; border-left:0px; border-right:0px; border-bottom: 1px"
-									  placeholder="Search">
+									  class="mr-2 bg-dark text-light border-secondary search"
+									  placeholder="Search"
+									  v-model="searchString"
+									  @keyup.enter="onSearch">
 						</b-form-input>
 						<b-button size="sm"
 								  class="mr-2"
 								  variant="light"
-								  type="submit">
+								  @click="onSearch">
 							Search
 						</b-button>
 						<b-link v-if="isAdmin"

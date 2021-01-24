@@ -21,10 +21,6 @@ export class GameService extends BaserService implements IGameService {
 		});
 	}
 
-	removeGame(id: string): Promise<any> {
-		throw new Error("Method not implemented.");
-	}
-
 	public async addGame(request: types.AddGameRequest): Promise<string> {
 		const apiRequest: clientTypes.AddGameRequest = Converter.convertAddGameRequestToApi(request);
 		const result: string = await this.client.addGame(apiRequest);

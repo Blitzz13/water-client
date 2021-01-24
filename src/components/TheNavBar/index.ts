@@ -11,6 +11,16 @@ export default class TheNavBar extends Vue {
 	@Inject()
 	public userService: userTypes.IUserService;
 
+	private m_searchString: string = null;
+
+	protected get searchString(): string {
+		return this.m_searchString;
+	}
+
+	protected set searchString(value: string) {
+		this.m_searchString = value;
+	}
+
 	protected get isAuthenticated(): boolean {
 		if (this.$store.getters) {
 			return this.$store.getters.isAuthenticated;
@@ -37,6 +47,10 @@ export default class TheNavBar extends Vue {
 
 	protected onLogOutClick(): void {
 		this.$store.commit("deleteUser");
+	}
+
+	protected onSearch(): void {
+		this.$router.push({ name: "games", query: { search: this.m_searchString } });
 	}
 
 	protected onTestClick(): void {

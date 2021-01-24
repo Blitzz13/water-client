@@ -7,6 +7,7 @@ import Store from "@/store";
 import VueRouter, { RouteConfig } from "vue-router";
 import NotFound from "@/views/NotFound/index.vue";
 import UpdateGame from "@/views/UpdateGame/index.vue";
+import Games from "@/views/Games/index.vue";
 
 Vue.use(VueRouter);
 
@@ -42,6 +43,11 @@ const routes: RouteConfig[] = [
 		component: UpdateGame,
 	},
 	{
+		path: "/games",
+		name: "games",
+		component: Games,
+	},
+	{
 		path: "*",
 		name: "404",
 		component: NotFound,
@@ -49,10 +55,12 @@ const routes: RouteConfig[] = [
 ];
 
 const router = new VueRouter({
+	mode: "history",
 	routes,
 });
 
 router.beforeEach((to, from, next) => {
+	debugger
 	const privatePages: string[] = [];
 	const authRequired = privatePages.includes(to.path);
 	const authenticated = Store.getters.isAuthenticated;
