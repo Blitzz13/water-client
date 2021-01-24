@@ -67,11 +67,9 @@ export default class Game extends BaseView {
 		} else {
 			this.$router.push(this.$route.path.concat("?authenticated=false"));
 		}
-
 	}
 
 	private convertGameToVue(value: gameTypes.Game): GameVueModel {
-
 		return {
 			companyName: value.companyName,
 			name: value.name,

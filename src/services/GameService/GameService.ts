@@ -32,6 +32,13 @@ export class GameService extends BaserService implements IGameService {
 		return result;
 	}
 
+	public async updateGame(request: types.UpdateGameRequest): Promise<string> {
+		const apiRequest: clientTypes.UpdateGameRequest = Converter.convertUpdateGameRequestToApi(request);
+		const result: string = await this.client.updateGame(apiRequest);
+
+		return result;
+	}
+
 	public async listUserGames(id: string): Promise<types.GameItem[]> {
 		const apiResult: clientTypes.GameItem[] = await this.client.listUserGames(id);
 		const result: types.GameItem[] = apiResult.map(Converter.convertGameItemToService);

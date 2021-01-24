@@ -51,6 +51,23 @@ body {
 .add-image-margin {
 	margin-top: 30px;
 }
+
+.scroll-images {
+	background-color: #333;
+	overflow: auto;
+	white-space: nowrap;
+	margin-right: 10px;
+	display: inline-block;
+}
+
+	.scroll-images div {
+		margin-right: 10px;
+		display: inline-block;
+	}
+
+.scroll-images-icon {
+	transform: translate(-120%, -390%) !important;
+}
 /* Not found page*/
 @import url(https://fonts.googleapis.com/css?family=Gilda+Display);
 
