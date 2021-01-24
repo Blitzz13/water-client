@@ -36,6 +36,11 @@
 			</b-row>
 			<b-row>
 				<b-col>
+					<b-link class="float-right mt-2 mb-3 ml-2 bg-info"
+							router-tag="b-button"
+							:to="{name: 'update-game',params:{id: gameId}}">
+						Edit
+					</b-link>
 					<b-button v-if="!isGameBought"
 							  class="float-right mt-2 mb-3"
 							  variant="primary"

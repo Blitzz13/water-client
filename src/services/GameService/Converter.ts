@@ -37,6 +37,21 @@ export default class Converter {
 		}
 	}
 
+	public static convertUpdateGameRequestToApi(value: types.UpdateGameRequest): clients.UpdateGameRequest {
+		return {
+			id: value.id,
+			name: value.name,
+			companyName: value.companyName,
+			genre: this.convertGenreToApi(value.genre),
+			state: this.convertGameStateToApi(value.state),
+			isFeatured: value.isFeatured,
+			coverImage: value.coverImage,
+			imageUrls: value.imageUrls,
+			description: value.description,
+			price: value.price,
+		}
+	}
+
 	public static convertGenreToApi(value: types.Genre): clients.Genre {
 		switch (value) {
 			case types.Genre.ACTION:

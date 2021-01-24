@@ -11,6 +11,21 @@ export interface AddGameRequest {
 	companyName: string;
 }
 
+export interface UpdateGameRequest {
+	id: string;
+	name: string;
+	description: string;
+	price: number;
+	rating?: number;
+	state: GameState;
+	coverImage: string;
+	imageUrls: string[];
+	genre: Genre;
+	isFeatured: boolean;
+	companyName: string;
+}
+
+
 export enum GameState {
 	RELEASED = "Released",
 	EARLY_ACCESS = "EarlyAccess",

@@ -2,7 +2,7 @@ import "reflect-metadata";
 import buildDependencyContainer from "@/app.container";
 import TheNavBar from "@/components/TheNavBar/index.vue";
 import LoadingSpinner from "@/components/LoadingSpinner/index.vue";
-import BootstrapVue from "bootstrap-vue";
+import { BootstrapVue, BootstrapVueIcons } from "bootstrap-vue";
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
@@ -12,6 +12,7 @@ const animatecss = require("animate.css")
 require("@/assets/styles/style.css");
 require("@/utils/generalUtils.ts");
 Vue.use(BootstrapVue);
+Vue.use(BootstrapVueIcons);
 Vue.use(animatecss);
 Vue.config.productionTip = false;
 Vue.component("the-nav-bar", TheNavBar);

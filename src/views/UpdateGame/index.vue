@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<add-update-game></add-update-game>
+		<add-update-game :id="id"></add-update-game>
 	</div>
 </template>
 

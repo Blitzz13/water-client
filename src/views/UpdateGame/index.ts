@@ -7,6 +7,8 @@ import { Component } from "vue-property-decorator";
 		AddUpdateGame
 	},
 })
-export default class AddGame extends BaseView {
-	
+export default class UpdateGame extends BaseView {
+	protected get id(): string {
+		return this.$route.params.id;
+	}
 }

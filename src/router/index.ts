@@ -6,6 +6,7 @@ import Vue from "vue";
 import Store from "@/store";
 import VueRouter, { RouteConfig } from "vue-router";
 import NotFound from "@/views/NotFound/index.vue";
+import UpdateGame from "@/views/UpdateGame/index.vue";
 
 Vue.use(VueRouter);
 
@@ -34,6 +35,11 @@ const routes: RouteConfig[] = [
 		path: "/games/add",
 		name: "add-game",
 		component: AddGame,
+	},
+	{
+		path: "/games/update/:id",
+		name: "update-game",
+		component: UpdateGame,
 	},
 	{
 		path: "*",
