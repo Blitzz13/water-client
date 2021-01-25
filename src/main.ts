@@ -3,6 +3,7 @@ import buildDependencyContainer from "@/app.container";
 import TheNavBar from "@/components/TheNavBar/index.vue";
 import LoadingSpinner from "@/components/LoadingSpinner/index.vue";
 import { BootstrapVue, BootstrapVueIcons } from "bootstrap-vue";
+import VeeValidate from 'vee-validate';
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
@@ -11,6 +12,9 @@ import store from "./store";
 const animatecss = require("animate.css")
 require("@/assets/styles/style.css");
 require("@/utils/generalUtils.ts");
+Vue.use(VeeValidate, {
+	mode:"eager"
+});
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
 Vue.use(animatecss);

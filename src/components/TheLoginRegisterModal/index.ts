@@ -21,6 +21,7 @@ export default class TheLoginModal extends Vue {
 	private m_registerContent: RegisterVueModel = null;
 	private m_showModal: boolean = false;
 	private m_showSpinner: boolean = false;
+	private m_register: boolean = false;
 
 	protected get showModal(): boolean {
 		return this.m_showModal;
@@ -30,8 +31,20 @@ export default class TheLoginModal extends Vue {
 		this.m_showModal = value;
 	}
 
+	protected get modalTitle(): string {
+		if (this.m_register) {
+			return "Register new account";
+		}
+			
+		return "Login with existing account";
+	}
+
 	protected get showSpinner(): boolean {
 		return this.m_showSpinner;
+	}
+
+	protected get register(): boolean {
+		return this.m_register;
 	}
 
 	protected get loginContent() {
@@ -47,7 +60,7 @@ export default class TheLoginModal extends Vue {
 	}
 
 	protected onRegisterContentChange(value: RegisterVueModel): void {
-		this.m_loginContent = value;
+		this.m_registerContent = value;
 	}
 
 	@Watch("$route.query", { immediate: true })
@@ -55,6 +68,10 @@ export default class TheLoginModal extends Vue {
 		if (this.$route.query["authenticated"] === "false") {
 			this.m_showModal = true;
 		}
+	}
+
+	protected onChangeContentClick() {
+		this.m_register = !this.m_register;
 	}
 
 	protected onLoading(): void {

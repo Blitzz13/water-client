@@ -16,6 +16,7 @@
 		"generated-clients": "./packages/generated-clients-1.0.0.tgz",
 		"inversify-props": "^2.2.6",
 		"reflect-metadata": "0.1.13",
+		"vee-validate": "^2.2.15",
 		"vue": "^2.6.12",
 		"vue-class-component": "^7.2.3",
 		"vue-property-decorator": "^8.4.2",

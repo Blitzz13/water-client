@@ -60,7 +60,6 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-	debugger
 	const privatePages: string[] = [];
 	const authRequired = privatePages.includes(to.path);
 	const authenticated = Store.getters.isAuthenticated;
