@@ -36,7 +36,8 @@
 			</b-row>
 			<b-row>
 				<b-col>
-					<b-link class="float-right mt-2 mb-3 ml-2 bg-info"
+					<b-link v-if="isAdmin"
+							class="float-right mt-2 mb-3 ml-2 bg-info"
 							router-tag="b-button"
 							:to="{name: 'update-game',params:{id: gameId}}">
 						Edit

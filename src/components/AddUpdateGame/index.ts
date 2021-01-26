@@ -2,10 +2,15 @@ import * as gameTypes from "@/services/GameService";
 import GeneralUtils from "@/utils/generalUtils";
 import BaseView from "@/views/BaseView";
 import { Inject } from "inversify-props";
-import { Component, Prop } from "vue-property-decorator";
+import { ValidationObserver, ValidationObserverInstance, ValidationProvider } from 'vee-validate';
+import { Component, Prop, Ref } from "vue-property-decorator";
 
 @Component({
 	name: "add-update-game",
+	components: {
+		ValidationProvider,
+		ValidationObserver,
+	},
 })
 export default class AddUpdateGame extends BaseView {
 	@Prop()
@@ -13,6 +18,9 @@ export default class AddUpdateGame extends BaseView {
 
 	@Inject()
 	public gameService: gameTypes.GameService;
+
+	@Ref("observer")
+	protected observer: ValidationObserverInstance;
 
 	private m_gameInput: GameInputModel = {
 		companyName: "",
@@ -115,9 +123,13 @@ export default class AddUpdateGame extends BaseView {
 
 	protected async onAddGameClick(): Promise<void> {
 		try {
-			this.isLoading = true;
-			const id: string = await this.gameService.addGame(this.convertGameInputToAddRequest(this.m_gameInput));
-			this.$router.push({ name: "game-details", params: { id: id } });
+			const isValid: boolean = await this.observer.validate();
+
+			if (isValid) {
+				this.isLoading = true;
+				const id: string = await this.gameService.addGame(this.convertGameInputToAddRequest(this.m_gameInput));
+				this.$router.push({ name: "game-details", params: { id: id } });
+			}
 		} catch (ex) {
 			throw new Error(ex);
 		} finally {
@@ -127,9 +139,13 @@ export default class AddUpdateGame extends BaseView {
 
 	protected async onUpdateGameClick(): Promise<void> {
 		try {
-			this.isLoading = true;
-			const id: string = await this.gameService.updateGame(this.convertGameInputToUpdateRequest(this.m_gameInput));
-			this.$router.push({ name: "game-details", params: { id: id } });
+			const isValid: boolean = await this.observer.validate();
+
+			if (isValid) {
+				this.isLoading = true;
+				const id: string = await this.gameService.updateGame(this.convertGameInputToUpdateRequest(this.m_gameInput));
+				this.$router.push({ name: "game-details", params: { id: id } });
+			}
 		} catch (ex) {
 			throw new Error(ex);
 		} finally {

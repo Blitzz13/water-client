@@ -40,6 +40,10 @@ export default class Game extends BaseView {
 		return this.m_gameVue;
 	}
 
+	protected get isAdmin(): boolean {
+		return this.$store.getters.isAdmin;
+	}
+
 	public async mounted(): Promise<void> {
 		try {
 			this.isLoading = true;

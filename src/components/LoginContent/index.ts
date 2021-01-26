@@ -1,14 +1,22 @@
 import * as userTypes from "@/services/UserService";
 import GeneralUtils from "@/utils/generalUtils";
 import { Inject } from 'inversify-props';
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Ref } from "vue-property-decorator";
+import { ValidationProvider, ValidationObserver, ValidationObserverInstance } from 'vee-validate';
 
 @Component({
 	name: "login-content",
+	components: {
+		ValidationProvider,
+		ValidationObserver,
+	}
 })
 export default class LoginContent extends Vue {
 	@Inject()
 	public userService: userTypes.IUserService;
+
+	@Ref("observer")
+	protected observer: ValidationObserverInstance;
 
 	private m_loginModel: LoginVueModel = {
 		username: null,
@@ -32,12 +40,16 @@ export default class LoginContent extends Vue {
 
 	protected async onLoginClick(): Promise<void> {
 		try {
-			this.$emit("loading");
-			const response: userTypes.AuthenticateResponse
-				= await this.userService.authenticate(this.convertLoginVueModelToService(this.m_loginModel));
+			const isValid: boolean = await this.observer.validate();
+			
+			if (isValid) {
+				this.$emit("loading");
+				const response: userTypes.AuthenticateResponse
+					= await this.userService.authenticate(this.convertLoginVueModelToService(this.m_loginModel));
 
-			this.$store.commit("setUser", response);
-			this.$emit("user-login");
+				this.$store.commit("setUser", response);
+				this.$emit("user-login");
+			}
 		} catch (ex) {
 			throw new Error(ex);
 		} finally {

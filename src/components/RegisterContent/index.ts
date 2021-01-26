@@ -1,14 +1,22 @@
 import * as types from "@/services/UserService";
 import GeneralUtils from "@/utils/generalUtils";
 import { Inject } from 'inversify-props';
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Ref } from "vue-property-decorator";
+import { ValidationProvider, ValidationObserver, ValidationObserverInstance } from 'vee-validate';
 
 @Component({
-	name: "register-content"
+	name: "register-content",
+	components: {
+		ValidationProvider,
+		ValidationObserver,
+	},
 })
 export default class RegisterContent extends Vue {
 	@Inject()
 	public userService: types.IUserService;
+
+	@Ref("observer")
+	protected observer: ValidationObserverInstance;
 
 	private m_registerModel: RegisterVueModel = {
 		username: null,
@@ -34,12 +42,15 @@ export default class RegisterContent extends Vue {
 		this.m_registerModel = value;
 	}
 
-	protected onSubmitClick() {
+	protected async onSubmitClick(): Promise<void> {
 		try {
-			this.$emit("loading");
-			this.userService.register(this.convertRegisterVueModelToService(this.m_registerModel));
+			const isValid: boolean = await this.observer.validate();
 
-			this.$emit("user-register");
+			if (isValid) {
+				this.$emit("loading");
+				this.userService.register(this.convertRegisterVueModelToService(this.m_registerModel));
+				this.$emit("user-register");
+			}
 		} catch (ex) {
 			throw new Error(ex);
 		} finally {

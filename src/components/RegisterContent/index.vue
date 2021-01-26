@@ -1,8 +1,5 @@
 <template>
 	<div class="container">
-		<h3>
-			Register new account
-		</h3>
 		<b-row>
 			<b-col>
 				<b-form-group>
@@ -10,9 +7,14 @@
 						Username
 					</label>
 					<b-form-input :id="labelIds.usernameId"
+								  name="Username"
+								  v-validate="'required|min:5'"
 								  placeholder="johndoe"
 								  v-model="registerModel.username">
 					</b-form-input>
+					<span class="text-dark">
+						{{ errors.first('Username') }}
+					</span>
 				</b-form-group>
 			</b-col>
 			<b-col>
@@ -21,9 +23,14 @@
 						Email
 					</label>
 					<b-form-input :id="labelIds.emailId"
+								  name="Email"
+								  v-validate="'required|email'"
 								  placeholder="john@doe.jd"
 								  v-model="registerModel.email">
 					</b-form-input>
+					<span class="text-dark">
+						{{ errors.first('Email') }}
+					</span>
 				</b-form-group>
 			</b-col>
 		</b-row>
@@ -45,10 +52,15 @@
 						Password
 					</label>
 					<b-form-input :id="labelIds.passwordId"
+								  name="Password"
+								  v-validate="'required|min:5'"
 								  type="password"
 								  placeholder="**********"
 								  v-model="registerModel.password">
 					</b-form-input>
+					<span class="text-dark">
+						{{ errors.first('Password') }}
+					</span>
 				</b-form-group>
 			</b-col>
 		</b-row>
