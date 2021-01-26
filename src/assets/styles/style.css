@@ -89,6 +89,7 @@ input::-webkit-inner-spin-button {
 input[type=number] {
 	-moz-appearance: textfield;
 }
+
 /* Not found page*/
 @import url(https://fonts.googleapis.com/css?family=Gilda+Display);
 
